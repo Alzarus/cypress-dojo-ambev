@@ -1,0 +1,24 @@
+{
+  "name": "cypress-dojo-ambev",
+  "version": "1.0.0",
+  "description": "Dojô de práticas com o framework Cypress - 2022",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alzarus/cypress-dojo-ambev.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alzarus/cypress-dojo-ambev/issues"
+  },
+  "homepage": "https://github.com/Alzarus/cypress-dojo-ambev#readme",
+  "devDependencies": {
+    "cypress": "^10.11.0",
+    "faker-br": "^0.4.1"
+  }
+}

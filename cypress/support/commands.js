@@ -33,7 +33,7 @@ Cypress.Commands.add('cadastro', (nome, email, senha, confirmarSenha) => {
     cy.get('[data-test="register-submit"]').click();
 });
 
-Cypress.Commands.add('login', (nome, email, senha) => {
+Cypress.Commands.add('login', (email, senha) => {
     cy.visit('/cadastrar');
     cy.get('[data-test="register-login"]').click();
     cy.get('[data-test="login-email"] > .MuiInputBase-root > .MuiInputBase-input').type(email);

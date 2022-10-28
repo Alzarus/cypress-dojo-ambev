@@ -55,7 +55,7 @@ describe('Funcionalidade: Cadastro', () => {
 
         cy.get('[data-test="navbar-logout"]').click();
 
-        cy.login(nome, email, senha);
+        cy.login(email, senha);
 
         cy.get('.large').should('contain', 'Dashboard');
         cy.contains(nome).should('exist');

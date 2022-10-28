@@ -26,10 +26,17 @@
 
 Cypress.Commands.add('cadastro', (nome, email, senha, confirmarSenha) => {
     cy.visit('/cadastrar');
-
     cy.get('[data-test="register-name"] > .MuiInputBase-root > .MuiInputBase-input').type(nome);
     cy.get('[data-test="register-email"] > .MuiInputBase-root > .MuiInputBase-input').type(email);
     cy.get('[data-test="register-password"]').type(senha);
     cy.get('[data-test="register-password2"]').type(confirmarSenha);
     cy.get('[data-test="register-submit"]').click();
+});
+
+Cypress.Commands.add('login', (nome, email, senha) => {
+    cy.visit('/cadastrar');
+    cy.get('[data-test="register-login"]').click();
+    cy.get('[data-test="login-email"] > .MuiInputBase-root > .MuiInputBase-input').type(email);
+    cy.get('[data-test="login-password"] > .MuiInputBase-root > .MuiInputBase-input').type(senha);
+    cy.get('[data-test="login-submit"]').click();
 });

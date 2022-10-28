@@ -15,7 +15,6 @@ describe('Funcionalidade: Cadastro', () => {
 
         cy.cadastro(nome, email, senha, senha);
 
-
         cy.get('.large').should('contain', 'Dashboard');
         cy.contains(nome).should('exist');
 
@@ -35,6 +34,32 @@ describe('Funcionalidade: Cadastro', () => {
 
         cy.get('[data-test="alert"]').should('have.text', 'Usuário já registrado');
         // cy.contains('Usuário já registrado').should('exist');
+    });
+
+    it('Devo validar as mensagens de campos obrigatórios', () => {
+        cy.get('[data-test="register-submit"]').click();
+
+        cy.get('[data-test="register-name"] > .MuiFormHelperText-root').should('have.text', 'Email é obrigatório');
+        cy.get('[data-test="register-email"] > .MuiFormHelperText-root').should('have.text', 'Email é obrigatório');
+        cy.get('[data-test="register-password"] > .MuiFormHelperText-root').should('have.text', 'Senha é obrigatória');
+        cy.get('[data-test="register-password2"] > .MuiFormHelperText-root').should('have.text', 'Confirmar senha é obrigatória');
+
+    });
+
+    it('Realizar cadastro, realizar logout e realizar login através do hiperlink da página cadastro', () => {
+        let nome = `${faker.name.firstName()} ${faker.name.lastName()}`;
+        let email = faker.internet.email(nome);
+        let senha = faker.internet.password();
+
+        cy.cadastro(nome, email, senha, senha);
+
+        cy.get('[data-test="navbar-logout"]').click();
+
+        cy.login(nome, email, senha);
+
+        cy.get('.large').should('contain', 'Dashboard');
+        cy.contains(nome).should('exist');
+
     });
 
 });

@@ -60,6 +60,7 @@ describe('Funcionalidade: Cadastro', () => {
         cy.get('.large').should('contain', 'Dashboard');
         cy.contains(nome).should('exist');
 
+        
     });
 
 });

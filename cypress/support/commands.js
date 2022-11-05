@@ -50,7 +50,7 @@ Cypress.Commands.add('loginNew', (email, senha) => {
 
 Cypress.Commands.add('criarPerfil', (empresa, site, localizacao, skill, github, biografia) => {
     cy.get('#mui-component-select-status').click();
-    cy.wait(5000);
+    cy.wait(2000);
     cy.get('.MuiList-root').contains('Especialista em QA').click();
 
     cy.get('[data-test="profile-company"] > .MuiInputBase-root > .MuiInputBase-input').type(empresa);

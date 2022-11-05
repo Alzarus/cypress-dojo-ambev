@@ -19,7 +19,7 @@ describe('Funcionalidade: Cadastrar perfil', () => {
 
     it('Deve criar perfil com sucesso', () => {
         cy.get('#mui-component-select-status').click();
-        cy.wait(5000);
+        cy.wait(2000);
         // cy.get('.MuiList-root').find('[data-value="Especialista em QA"]').click();
         // cy.contains('Especialista em QA').click();
         cy.get('.MuiList-root').contains('Especialista em QA').click();
@@ -39,5 +39,10 @@ describe('Funcionalidade: Cadastrar perfil', () => {
     it('Deve criar o perfil com sucesso, usando command', () => {
         cy.criarPerfil(perfil.empresa, perfil.site, perfil.localizacao, perfil.skill, perfil.github, perfil.biografia);
         cy.get('[data-test="dashboard-editProfile"]').should('exist').and('be.visible');
+    });
+
+    it('Deve criar o perfil e validar mensagem de erro com site errado', () => {
+        cy.criarPerfil(perfil.empresa, 'siteErrado', perfil.localizacao, perfil.skill, perfil.github, perfil.biografia);
+        cy.get('[data-test="profile-webSite"] > .MuiFormHelperText-root').should('be.visible').and('have.css', 'color', 'rgb(244, 67, 54)').and('contain', 'Digite uma url válida');
     });
 });

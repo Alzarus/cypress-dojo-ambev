@@ -1,7 +1,6 @@
 import user from '../../fixtures/usuario.json';
 
 // API:
-// •	Cadastro de perfil:
 // o	cenário validar exclusão de experiência do usuário;
 // o	cenário validar inclusão de formação acadêmica.
 // Fiquem a vontade em tentar implementar outros tipos de cenário, vai ser bom para validar o conhecimento e praticar.
@@ -65,6 +64,15 @@ describe('Funcionalidade: Perfil via api', () => {
     });
 
     it('[POST] - Deve realizar cadastro de perfil do usuário', () => {
+        // const testSkillsArray = testSkills.split(','); // string to array
+        const testStatus = perfil.cargo;
+        const testSkills = perfil.skill;
+        const testCompany = perfil.empresa;
+        const testLocation = perfil.localizacao;
+        const testWebsite = perfil.site;
+        const testBio = perfil.biografia;
+        const testGithub = perfil.github;
+
         const options = {
             method: 'POST',
             url: '/api/profile',
@@ -72,11 +80,91 @@ describe('Funcionalidade: Perfil via api', () => {
                 Cookie: token
             },
             body: {
-                company: perfil.empresa,
-                status: 'Ambev',
+                status: testStatus,
+                skills: testSkills,
+                company: testCompany,
+                location: testLocation,
+                website: testWebsite,
+                bio: testBio,
+                githubusername: testGithub
+            }
+        };
+
+        cy.request(options).then(($response) => {
+            //health check
+            expect($response.status).to.equal(200);
+            expect($response.duration).to.be.below(500);
+            expect($response.body.status).to.equal(testStatus);
+
+            const skillsString = $response.body.skills.join(', '); //array to string
+            expect(skillsString).to.equal(testSkills);
+
+            //contrato
+            expect($response.body).to.include.keys("bio", "company", "date", "education", "experience",
+                "githubusername", "location", "skills", "social", "status", "user", "website");
+
+            //aceitacao
+            expect($response.body.company).to.equal(testCompany);
+            expect($response.body.location).to.equal(testLocation);
+            expect($response.body.website).to.equal(testWebsite);
+            expect($response.body.bio).to.equal(testBio);
+            expect($response.body.githubusername).to.equal(testGithub);
+
+        });
+    });
+
+    it('[POST] - Deve retornar falha no cadastro de perfil de usuário por não fornecer dados obrigatórios', () => {
+        const options = {
+            method: 'POST',
+            url: '/api/profile',
+            failOnStatusCode: false,
+            headers: {
+                Cookie: token
+            }
+        };
+
+        cy.request(options).then((res) => {
+            //health check
+            expect(res.status).to.equal(400);
+            expect(res.duration).to.be.below(500);
+
+            //contrato
+            expect(res.body).to.include.keys("errors");
+
+            //aceitacao
+            res.body.errors.forEach(element => {
+                // expect(element.msg).to.include('Status' || 'Skills');
+                expect(element).to.have.keys("msg", "param", "location");
+            });
+        })
+    });
+
+    //todo: continuar
+    it('[DELETE] - Deve realizar exclusão de experiência profissional', () => {
+        const optionsGet = {
+            method: 'GET',
+            url: '/api/profile',
+
+        }
+
+        // health check - garantir que esta funcionando
+        // contrato - garantir que o endpoint não teve seus atributos alterados
+        // aceitação - garantir que o endpoint funciona ou apresenta os resultados de falha esperados
+        // funcional - garantir que um conjunto de endpoints funcionam como na UI
+
+
+        const optionsDelete = {
+            method: 'DELETE',
+            url: `/api/profile/experience/${expId}`,
+            headers: {
+                Cookie: token
+            },
+            body: {
+                title: 'QA Especialist',
+                company: 'Ambev',
                 from: '2022-09-09'
             }
-        };        
+        };
     });
 
     it('[PUT] - Deve realizar inclusão de formação acadêmica', () => {
@@ -91,21 +179,7 @@ describe('Funcionalidade: Perfil via api', () => {
                 company: 'Ambev',
                 from: '2022-09-09'
             }
-        };        
+        };
     });
 
-    it('[DELETE] - Deve realizar remoção de experiência profissional', () => {
-        const options = {
-            method: 'PUT',
-            url: '/api/profile/experience',
-            headers: {
-                Cookie: token
-            },
-            body: {
-                title: 'QA Especialist',
-                company: 'Ambev',
-                from: '2022-09-09'
-            }
-        };        
-    });
 });

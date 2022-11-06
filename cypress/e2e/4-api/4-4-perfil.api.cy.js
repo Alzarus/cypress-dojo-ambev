@@ -151,6 +151,7 @@ describe('Funcionalidade: Perfil via api', () => {
         // contrato - garantir que o endpoint não teve seus atributos alterados
         // aceitação - garantir que o endpoint funciona ou apresenta os resultados de falha esperados
         // funcional - garantir que um conjunto de endpoints funcionam como na UI
+        // https://conexaoqa.herokuapp.com/api-docs/#/
 
 
         const optionsDelete = {
@@ -170,7 +171,7 @@ describe('Funcionalidade: Perfil via api', () => {
     it('[PUT] - Deve realizar inclusão de formação acadêmica', () => {
         const options = {
             method: 'PUT',
-            url: '/api/profile/experience',
+            url: '/api/profile/education',
             headers: {
                 Cookie: token
             },

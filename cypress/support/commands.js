@@ -75,3 +75,10 @@ Cypress.Commands.add('gerarToken', (email, senha) => {
         return $response.body.jwt;
     });
 });
+
+Cypress.Commands.add('mockPerfis', (bodyMock) => {
+    cy.intercept('GET', '/api/profile', {
+        statusCode: 200,
+        body: bodyMock
+    }).as('getPerfis');
+});

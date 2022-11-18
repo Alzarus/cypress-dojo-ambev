@@ -82,3 +82,7 @@ Cypress.Commands.add('mockPerfis', (bodyMock) => {
         body: bodyMock
     }).as('getPerfis');
 });
+
+Cypress.Commands.add('testFuncao', (palavra) => {
+    cy.log(palavra);
+})

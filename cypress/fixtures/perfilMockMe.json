@@ -1,0 +1,49 @@
+{
+    "social": {
+        "youtube": "",
+        "twitter": "",
+        "facebook": "",
+        "linkedin": "",
+        "instagram": "",
+        "medium": ""
+    },
+    "skills": [
+        "Cypress",
+        "Mock"
+    ],
+    "_id": "63655dcbdcaab50015e6021d",
+    "user": {
+        "_id": "63654dd7dcaab50015e60212",
+        "name": "PehMock",
+        "avatar": "//www.gravatar.com/avatar/b0a8bf89c7949a86d46a666fa536ebd7?s=200&r=pg&d=mm"
+    },
+    "company": "Mockadores Anônimos",
+    "website": "https://www.universalmock.com.br",
+    "location": "Mockerland",
+    "bio": "Vou te mockei",
+    "status": "PHD em Mock",
+    "githubusername": "https://github.com/alzarus",
+    "experience": [
+        {
+            "current": false,
+            "_id": "63753028c74a34001577779d",
+            "title": "Mock Especialist",
+            "company": "Mock Company S.A",
+            "from": "2022-09-09T00:00:00.000Z"
+        }
+    ],
+    "education": [
+        {
+            "current": false,
+            "_id": "6375302ac74a34001577779e",
+            "school": "Dojo Mock",
+            "degree": "Superior",
+            "fieldofstudy": "Mockaria de sistemas",
+            "from": "2017-01-01T00:00:00.000Z",
+            "to": "2022-12-31T00:00:00.000Z",
+            "description": "Mocka y mocka, jogador"
+        }
+    ],
+    "date": "2022-11-04T18:45:31.518Z",
+    "__v": 138
+}
